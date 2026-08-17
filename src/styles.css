@@ -1,0 +1,482 @@
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --baseline: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.1);
+  --accent: #2a78d6;
+  --suksess: #006300;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --ink: #ffffff;
+    --ink-2: #c3c2b7;
+    --muted: #898781;
+    --grid: #2c2c2a;
+    --baseline: #383835;
+    --border: rgba(255, 255, 255, 0.1);
+    --accent: #3987e5;
+    --suksess: #0ca30c;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ramme {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 20px 40px;
+}
+
+header.topp {
+  padding: 8px 0 16px;
+}
+header.topp h1 {
+  margin: 0 0 2px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+header.topp p {
+  margin: 0;
+  color: var(--ink-2);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 330px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+@media (max-width: 940px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kort {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.sidepanel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sidepanel h2 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+}
+
+.hoved {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+
+/* ---------- skjemafelter ---------- */
+.felt {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+.felt:last-child {
+  margin-bottom: 0;
+}
+.felt > label {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.felt-rad {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.felt input[type='text'],
+.felt input[type='number'] {
+  width: 100%;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--baseline);
+  border-radius: 8px;
+  padding: 7px 10px;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+}
+.felt input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+.felt .suffiks {
+  color: var(--muted);
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+.hint {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 6px 0 0;
+}
+
+/* scenariotabellen i sidepanelet */
+.scenario-grid {
+  display: grid;
+  grid-template-columns: 1fr 58px 58px 58px;
+  gap: 6px 8px;
+  align-items: center;
+}
+.scenario-grid .kolonne-topp {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: right;
+}
+.scenario-grid .scenavn {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.scenario-grid input {
+  width: 100%;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--baseline);
+  border-radius: 6px;
+  padding: 4px 6px;
+  font: inherit;
+  font-size: 12.5px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.scenario-grid input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+details.seksjon summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+  user-select: none;
+}
+details.seksjon[open] summary {
+  margin-bottom: 10px;
+}
+details.seksjon ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  color: var(--ink-2);
+  font-size: 12.5px;
+}
+details.seksjon li {
+  margin-bottom: 5px;
+}
+
+/* ---------- strategikort ---------- */
+.strategi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(162px, 1fr));
+  gap: 10px;
+}
+.strategi-kort {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+}
+.strategi-kort.aktiv {
+  border-width: 2px;
+}
+.strategi-velg {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--ink);
+  cursor: pointer;
+}
+.strategi-velg:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+.strategi-topp {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin-bottom: 6px;
+}
+.serie-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: none;
+  margin-top: 4px;
+}
+.strategi-navn {
+  font-weight: 650;
+  font-size: 13.5px;
+}
+.badge-hoyest {
+  margin: -2px 0 6px;
+  font-size: 11px;
+  font-weight: 650;
+  color: var(--suksess);
+}
+.strategi-verdi {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.strategi-verdi.negativ {
+  color: inherit;
+}
+.strategi-under {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.strategi-besk {
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.strategi-fordeling {
+  margin-top: 8px;
+  font-size: 11.5px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.egen-panel {
+  border-top: 1px solid var(--border);
+  padding: 10px 14px 12px;
+}
+.egen-panel .felt {
+  margin-bottom: 8px;
+}
+.egen-panel input[type='range'] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+.egen-verdi {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* ---------- kontroller over grafen ---------- */
+.kontroll-rad {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.segment {
+  display: inline-flex;
+  background: var(--grid);
+  border-radius: 9px;
+  padding: 2px;
+}
+.segment button {
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 12.5px;
+  padding: 5px 12px;
+  border-radius: 7px;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.segment button[aria-pressed='true'] {
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 650;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+.segment button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+.chip-rad {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.chip {
+  border: 1px solid var(--baseline);
+  background: var(--surface);
+  color: var(--ink-2);
+  font: inherit;
+  font-size: 12.5px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.chip[aria-pressed='true'] {
+  border-color: var(--accent);
+  color: var(--ink);
+  font-weight: 650;
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+}
+.chip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* ---------- graf ---------- */
+.graf-kort h3 {
+  margin: 0 0 2px;
+  font-size: 15px;
+  font-weight: 650;
+}
+.graf-kort .under {
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.legende {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-bottom: 8px;
+}
+.legende button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  cursor: pointer;
+  padding: 3px 4px;
+  border-radius: 6px;
+}
+.legende button[aria-pressed='false'] {
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+.legende button:focus-visible {
+  outline: 2px solid var(--accent);
+}
+.legende .statisk {
+  cursor: default;
+}
+.legende .strek {
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+  flex: none;
+}
+
+/* ---------- nøkkeltall ---------- */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+}
+.tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+.tile .t-label {
+  font-size: 12px;
+  color: var(--ink-2);
+  margin-bottom: 4px;
+}
+.tile .t-verdi {
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.tile.hero .t-verdi {
+  font-size: 26px;
+  font-weight: 700;
+}
+@media (min-width: 620px) {
+  .tile.hero {
+    grid-column: span 2;
+  }
+}
+
+/* ---------- tabell ---------- */
+details.tabell-boks {
+  margin-top: 10px;
+}
+details.tabell-boks summary {
+  cursor: pointer;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  user-select: none;
+}
+.tabell-scroll {
+  overflow-x: auto;
+  margin-top: 8px;
+}
+table.aars-tabell {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+}
+.aars-tabell th,
+.aars-tabell td {
+  padding: 5px 10px;
+  text-align: right;
+  border-bottom: 1px solid var(--grid);
+  white-space: nowrap;
+}
+.aars-tabell th {
+  color: var(--ink-2);
+  font-weight: 600;
+}
+.aars-tabell th:first-child,
+.aars-tabell td:first-child {
+  text-align: left;
+}
+
+footer.bunn {
+  margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+}
+footer.bunn a {
+  color: var(--ink-2);
+}
